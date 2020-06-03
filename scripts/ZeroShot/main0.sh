@@ -1,11 +1,11 @@
 #!/bin/sh
 
-export CUDA_HOME=/opt/cuda-9.0.176.1/
-source activate pytorch
+#export CUDA_HOME=/opt/cuda-9.0.176.1/
+#source activate pytorch
 
-EXECUTABLE_FILE=/afs/inf.ed.ac.uk/user/s17/s1771851/git/ZeroShotKnowledgeTransfer/main.py
-LOG_DIR=/afs/inf.ed.ac.uk/user/s17/s1771851/logs
-PRETRAINED_MODELS_DIR=/disk/scratch/s1771851/Pretrained/
+EXECUTABLE_FILE=/home/seb/Repositories/ZeroShotKnowledgeTransfer/main.py
+LOG_DIR=/home/seb/Repositories/ZeroShotKnowledgeTransfer/logs
+PRETRAINED_MODELS_DIR=/home/seb/Repositories/ZeroShotKnowledgeTransfer/Pretrained/
 DATASETS_DIR=/disk/scratch/s1771851/Datasets/Pytorch
 
 python ${EXECUTABLE_FILE} \
