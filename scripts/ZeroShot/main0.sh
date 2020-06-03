@@ -3,12 +3,12 @@
 #export CUDA_HOME=/opt/cuda-9.0.176.1/
 #source activate pytorch
 
-EXECUTABLE_FILE=/home/seb/Repositories/ZeroShotKnowledgeTransfer/main.py
-LOG_DIR=/home/seb/Repositories/ZeroShotKnowledgeTransfer/logs
-PRETRAINED_MODELS_DIR=/home/seb/Repositories/ZeroShotKnowledgeTransfer/Pretrained/
-DATASETS_DIR=/disk/scratch/s1771851/Datasets/Pytorch
+EXECUTABLE_FILE=/home/grubi/Repositories/ZeroShotKnowledgeTransfer/main.py
+LOG_DIR=/home/grubi/Repositories/ZeroShotKnowledgeTransfer/logs
+PRETRAINED_MODELS_DIR=/home/grubi/Repositories/ZeroShotKnowledgeTransfer/Pretrained/
+DATASETS_DIR=~
 
-python ${EXECUTABLE_FILE} \
+python3 ${EXECUTABLE_FILE} \
 --dataset CIFAR10 \
 --total_n_pseudo_batches 8e4 \
 --n_generator_iter 1 \
