@@ -3,9 +3,9 @@
 #export CUDA_HOME=/opt/cuda-9.0.176.1/
 #source activate pytorch
 
-EXECUTABLE_FILE=/home/grubi/Repositories/ZeroShotKnowledgeTransfer/main.py
-LOG_DIR=/home/grubi/Repositories/ZeroShotKnowledgeTransfer/logs
-PRETRAINED_MODELS_DIR=/home/grubi/Repositories/ZeroShotKnowledgeTransfer/Pretrained/
+EXECUTABLE_FILE=~/Repositories/ZeroShotKnowledgeTransfer/main.py
+LOG_DIR=~/Repositories/ZeroShotKnowledgeTransfer/logs
+PRETRAINED_MODELS_DIR=~/Repositories/ZeroShotKnowledgeTransfer/Pretrained/
 DATASETS_DIR=~
 
 python3 ${EXECUTABLE_FILE} \

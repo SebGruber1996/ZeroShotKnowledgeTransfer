@@ -107,5 +107,5 @@ venv.bak/
 .mypy_cache/
 
 #codebase-specific
-logs/*
+#logs/*
 datasets/*
