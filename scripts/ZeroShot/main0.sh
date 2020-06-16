@@ -20,7 +20,7 @@ python3 ${EXECUTABLE_FILE} \
 --teacher_architecture WRN-16-2 \
 --student_architecture WRN-16-1 \
 --KL_temperature 1 \
---AT_beta 250 \
+--AT_beta 0 \
 --pretrained_models_path ${PRETRAINED_MODELS_DIR} \
 --datasets_path ${DATASETS_DIR} \
 --log_directory_path ${LOG_DIR} \
