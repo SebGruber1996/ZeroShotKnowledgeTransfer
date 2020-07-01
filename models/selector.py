@@ -2,6 +2,7 @@ import os
 
 from models.lenet import *
 from models.wresnet import *
+from models.conv_models import *
 
 
 def select_model(dataset,
@@ -28,6 +29,14 @@ def select_model(dataset,
             print('Loading Model from {}'.format(model_path))
             checkpoint = torch.load(model_path, map_location='cpu')
             model.load_state_dict(checkpoint['state_dict'])
+
+    elif dataset in ["Omniglot"]:
+        n_way = 5
+        n_channels = 64
+
+        if model_name == "Conv4":
+            model = ModelConvOmniglot(n_way, n_channels)
+            
 
     else:
         raise NotImplementedError

@@ -15,18 +15,18 @@ from utils.loaders import *
 
 class ZeroShotKTSolver(object):
     """ Main solver class to train and test the generator and student adversarially """
-    def __init__(self, args):
+    def __init__(self, args, teacher_model, student_model):
         self.args = args
 
         ## Student and Teacher Nets
-        self.teacher = select_model(dataset=args.dataset,
-                                    model_name=args.teacher_architecture,
-                                    pretrained=True,
-                                    pretrained_models_path=args.pretrained_models_path).to(args.device)
-        self.student = select_model(dataset=args.dataset,
-                                    model_name=args.student_architecture,
-                                    pretrained=False,
-                                    pretrained_models_path=args.pretrained_models_path).to(args.device)
+        self.teacher = teacher_model#select_model(dataset=args.dataset,
+                                    #model_name=args.teacher_architecture,
+                                    #pretrained=True,
+                                    #pretrained_models_path=args.pretrained_models_path).to(args.device)
+        self.student = student_model#select_model(dataset=args.dataset,
+                                    #model_name=args.student_architecture,
+                                    #pretrained=False,
+                                    #pretrained_models_path=args.pretrained_models_path).to(args.device)
         self.teacher.eval()
         self.student.train()
 

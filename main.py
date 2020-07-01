@@ -1,6 +1,7 @@
 import torch
 from solver import *
 from utils.helpers import *
+from models.selector import *
 
 def main(args):
     """
@@ -12,6 +13,20 @@ def main(args):
     torch.backends.cudnn.enabled = True
     torch.backends.cudnn.benchmark = True
 
+    teacher_model = select_model(
+        dataset=args.dataset,
+        model_name=args.teacher_architecture,
+        pretrained=True,
+        pretrained_models_path=args.pretrained_models_path
+    ).to(args.device)
+
+    student_model = select_model(
+        dataset=args.dataset,
+        model_name=args.student_architecture,
+        pretrained=False,
+        pretrained_models_path=args.pretrained_models_path
+    ).to(args.device)
+
     if len(args.seeds) > 1:
         test_accs = []
         base_name = args.experiment_name
@@ -19,7 +34,7 @@ def main(args):
             print('\n\n----------- SEED {} -----------\n\n'.format(seed))
             set_torch_seeds(seed)
             args.experiment_name = os.path.join(base_name, base_name+'_seed'+str(seed))
-            solver = ZeroShotKTSolver(args)
+            solver = ZeroShotKTSolver(args, teacher_model, student_model)
             test_acc = solver.run()
             test_accs.append(test_acc)
         mu = np.mean(test_accs)
@@ -30,7 +45,7 @@ def main(args):
             f.write("NA")
     else:
         set_torch_seeds(args.seeds[0])
-        solver = ZeroShotKTSolver(args)
+        solver = ZeroShotKTSolver(args, teacher_model, student_model)
         test_acc = solver.run()
         print('\n\nFINAL TEST ACC RATE: {:02.2f}'.format(test_acc))
         file_name = "final_test_acc_{:02.2f}".format(test_acc)
@@ -45,7 +60,7 @@ if __name__ == "__main__":
 
     parser = argparse.ArgumentParser(description='Welcome to the future')
 
-    parser.add_argument('--dataset', type=str, default='SVHN', choices=['SVHN', 'CIFAR10'])
+    parser.add_argument('--dataset', type=str, default='SVHN', choices=['SVHN', 'CIFAR10', "Omniglot"])
     parser.add_argument('--total_n_pseudo_batches', type=float, default=1000)
     parser.add_argument('--n_generator_iter', type=int, default=1, help='per batch, for few and zero shot')
     parser.add_argument('--n_student_iter', type=int, default=7, help='per batch, for few and zero shot')
@@ -82,4 +97,3 @@ if __name__ == "__main__":
     print('\nRunning on device: {}'.format(args.device))
 
     main(args)
-
