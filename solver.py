@@ -19,14 +19,8 @@ class ZeroShotKTSolver(object):
         self.args = args
 
         ## Student and Teacher Nets
-        self.teacher = teacher_model#select_model(dataset=args.dataset,
-                                    #model_name=args.teacher_architecture,
-                                    #pretrained=True,
-                                    #pretrained_models_path=args.pretrained_models_path).to(args.device)
-        self.student = student_model#select_model(dataset=args.dataset,
-                                    #model_name=args.student_architecture,
-                                    #pretrained=False,
-                                    #pretrained_models_path=args.pretrained_models_path).to(args.device)
+        self.teacher = teacher_model
+        self.student = student_model
         self.teacher.eval()
         self.student.train()
 

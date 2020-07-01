@@ -36,7 +36,12 @@ def select_model(dataset,
 
         if model_name == "Conv4":
             model = ModelConvOmniglot(n_way, n_channels)
-            
+        else:
+            raise NotImplementedError
+
+        if pretrained:
+            # we need file name in path
+            model.load_state_dict(torch.load(pretrained_models_path))
 
     else:
         raise NotImplementedError

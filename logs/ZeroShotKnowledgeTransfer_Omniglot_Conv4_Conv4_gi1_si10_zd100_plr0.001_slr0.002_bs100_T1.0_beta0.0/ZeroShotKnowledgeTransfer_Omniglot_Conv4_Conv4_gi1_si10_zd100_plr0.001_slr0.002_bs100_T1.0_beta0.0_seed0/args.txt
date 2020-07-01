@@ -1,0 +1,25 @@
+dataset 	 Omniglot
+total_n_pseudo_batches 	 80000
+n_generator_iter 	 1
+n_student_iter 	 10
+batch_size 	 100
+z_dim 	 100
+student_learning_rate 	 0.002
+generator_learning_rate 	 0.001
+teacher_architecture 	 Conv4
+student_architecture 	 Conv4
+KL_temperature 	 1.0
+AT_beta 	 0.0
+pretrained_models_path 	 /home/grubi/Repositories/master_thesis_sg/results/Omniglot/batch_size_8_meta_epochs_100_max_batches_100_max_batches_val_100_seed_123/teacher_model_2020-07-01 17:04:22.434139.th
+datasets_path 	 /home/grubi
+log_directory_path 	 /home/grubi/Repositories/ZeroShotKnowledgeTransfer/logs
+save_final_model 	 True
+save_n_checkpoints 	 0
+save_model_path 	 /home/grubi/Repositories/ZeroShotKnowledgeTransfer/logs
+seeds 	 [0, 1, 2]
+workers 	 2
+use_gpu 	 True
+log_freq 	 800
+dataset_path 	 /home/grubi/Omniglot
+device 	 cuda
+experiment_name 	 ZeroShotKnowledgeTransfer_Omniglot_Conv4_Conv4_gi1_si10_zd100_plr0.001_slr0.002_bs100_T1.0_beta0.0/ZeroShotKnowledgeTransfer_Omniglot_Conv4_Conv4_gi1_si10_zd100_plr0.001_slr0.002_bs100_T1.0_beta0.0_seed0

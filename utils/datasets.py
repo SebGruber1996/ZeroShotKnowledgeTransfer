@@ -12,6 +12,11 @@ def get_test_loader(args):
             transforms.ToTensor(),
             transforms.Normalize(mean, std)])
         test_dataset = datasets.SVHN(args.dataset_path, split='test', download=True, transform=transform_test)
+        test_loader = torch.utils.data.DataLoader(
+            dataset=test_dataset, batch_size=args.batch_size,
+            shuffle=False, drop_last=False, num_workers=args.workers,
+            pin_memory=False)
+
 
     elif args.dataset == 'CIFAR10':
         mean = (0.4914, 0.4822, 0.4465)
@@ -20,13 +25,20 @@ def get_test_loader(args):
             transforms.ToTensor(),
             transforms.Normalize(mean, std)])
         test_dataset = datasets.CIFAR10(args.dataset_path, train=False, download=True, transform=transform_test)
+        test_loader = torch.utils.data.DataLoader(
+            dataset=test_dataset, batch_size=args.batch_size,
+            shuffle=False, drop_last=False, num_workers=args.workers,
+            pin_memory=False)
+
+
+    elif args.dataset == "Omniglot":
+        task_file = args.pretrained_models_path.replace("model", "task")
+        test_dataset = torch.load(task_file)
+        xs = torch.cat([test_dataset[0], test_dataset[2]])
+        ys = torch.cat([test_dataset[1], test_dataset[3]])
+        test_loader = zip(xs, ys)
 
     else:
         raise NotImplementedError
-
-    test_loader = torch.utils.data.DataLoader(
-        dataset=test_dataset, batch_size=args.batch_size,
-        shuffle=False, drop_last=False, num_workers=args.workers,
-        pin_memory=False)
 
     return test_loader
