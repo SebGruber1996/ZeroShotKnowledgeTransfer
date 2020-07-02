@@ -36,7 +36,9 @@ def get_test_loader(args):
         test_dataset = torch.load(task_file)
         xs = torch.cat([test_dataset[0], test_dataset[2]])
         ys = torch.cat([test_dataset[1], test_dataset[3]])
-        test_loader = zip(xs, ys)
+        #test_loader = zip(xs, ys)
+        # list with 1 element
+        test_loader = [(xs, ys)]
 
     else:
         raise NotImplementedError

@@ -14,6 +14,8 @@ python3 ${EXECUTABLE_FILE} \
 --n_student_iter 10 \
 --batch_size 64 \
 --z_dim 100 \
+--x_channels 1 \
+--x_dim 28 \
 --student_learning_rate 2e-3 \
 --generator_learning_rate 1e-3 \
 --teacher_architecture "Conv4" \

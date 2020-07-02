@@ -15,7 +15,7 @@ from utils.loaders import *
 
 class ZeroShotKTSolver(object):
     """ Main solver class to train and test the generator and student adversarially """
-    def __init__(self, args, teacher_model, student_model):
+    def __init__(self, args, teacher_model, student_model, generator):
         self.args = args
 
         ## Student and Teacher Nets
@@ -26,7 +26,11 @@ class ZeroShotKTSolver(object):
 
         ## Loaders
         self.n_repeat_batch = args.n_generator_iter + args.n_student_iter
-        self.generator = LearnableLoader(args=args, n_repeat_batch=self.n_repeat_batch).to(device=args.device)
+        self.generator = LearnableLoader(
+            args=args,
+            n_repeat_batch=self.n_repeat_batch,
+            generator=generator
+        ).to(device=args.device)
         self.test_loader = get_test_loader(args)
 
         ## Optimizers & Schedulers
@@ -87,6 +91,7 @@ class ZeroShotKTSolver(object):
             if idx_pseudo % self.n_repeat_batch < self.args.n_generator_iter:
                 student_logits, *student_activations = self.student(x_pseudo)
                 teacher_logits, *teacher_activations = self.teacher(x_pseudo)
+
                 generator_total_loss = self.KT_loss_generator(student_logits, teacher_logits)
 
                 self.optimizer_generator.zero_grad()

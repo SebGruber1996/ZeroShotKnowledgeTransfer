@@ -27,6 +27,6 @@ python3 ${EXECUTABLE_FILE} \
 --save_final_model True \
 --save_n_checkpoints 0 \
 --save_model_path ${LOG_DIR} \
---seeds 0 1 2 \
+--seeds 3 \
 --workers 2 \
 --use_gpu True

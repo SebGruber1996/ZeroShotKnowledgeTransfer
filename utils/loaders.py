@@ -18,6 +18,8 @@ def visualize(x_norm, dataset):
         mean = torch.Tensor([0.4914, 0.4822, 0.4465]).view(1, 3, 1, 1).to(x_norm.device)
         std = torch.Tensor([0.2023, 0.1994, 0.2010]).view(1, 3, 1, 1).to(x_norm.device)
         x = x_norm * std + mean
+    elif dataset == "Omniglot":
+        x = x_norm
     else:
         raise NotImplementedError
 
@@ -25,7 +27,7 @@ def visualize(x_norm, dataset):
 
 
 class LearnableLoader(nn.Module):
-    def __init__(self, args, n_repeat_batch):
+    def __init__(self, args, n_repeat_batch, generator):
         """
         Infinite loader, which contains a learnable generator.
         """
@@ -35,7 +37,7 @@ class LearnableLoader(nn.Module):
         self.batch_size = args.batch_size
         self.n_repeat_batch = n_repeat_batch
         self.z_dim = args.z_dim
-        self.generator = Generator(args.z_dim).to(device=args.device)
+        self.generator = generator
         self.device = args.device
 
         self._running_repeat_batch_idx = 0

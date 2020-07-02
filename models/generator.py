@@ -13,12 +13,14 @@ class View(nn.Module):
 
 class Generator(nn.Module):
 
-    def __init__(self, z_dim):
+    def __init__(self, z_dim, out_channels=1, out_dim=28):
         super(Generator, self).__init__()
 
+        kernel_size = out_dim // 4
+
         self.layers = nn.Sequential(
-            nn.Linear(z_dim, 128 * 8**2),
-            View((-1, 128, 8, 8)),
+            nn.Linear(z_dim, 128 * kernel_size**2),
+            View((-1, 128, kernel_size, kernel_size)),
             nn.BatchNorm2d(128),
 
             nn.Upsample(scale_factor=2),
@@ -31,9 +33,9 @@ class Generator(nn.Module):
             nn.BatchNorm2d(64),
             nn.LeakyReLU(0.2, inplace=True),
 
-            nn.Conv2d(64, 3, 3, stride=1, padding=1),
+            nn.Conv2d(64, out_channels, 3, stride=1, padding=1),
 
-            nn.BatchNorm2d(3, affine=True)
+            nn.BatchNorm2d(out_channels, affine=True)
         )
 
     def forward(self, z):

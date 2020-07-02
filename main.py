@@ -27,6 +27,12 @@ def main(args):
         pretrained_models_path=args.pretrained_models_path
     ).to(args.device)
 
+    generator_model = Generator(
+        z_dim=args.z_dim,
+        out_channels=args.x_channels,
+        out_dim=args.x_dim
+    ).to(device=args.device)
+
     if len(args.seeds) > 1:
         test_accs = []
         base_name = args.experiment_name
@@ -34,7 +40,7 @@ def main(args):
             print('\n\n----------- SEED {} -----------\n\n'.format(seed))
             set_torch_seeds(seed)
             args.experiment_name = os.path.join(base_name, base_name+'_seed'+str(seed))
-            solver = ZeroShotKTSolver(args, teacher_model, student_model)
+            solver = ZeroShotKTSolver(args, teacher_model, student_model, generator_model)
             test_acc = solver.run()
             test_accs.append(test_acc)
         mu = np.mean(test_accs)
@@ -45,7 +51,7 @@ def main(args):
             f.write("NA")
     else:
         set_torch_seeds(args.seeds[0])
-        solver = ZeroShotKTSolver(args, teacher_model, student_model)
+        solver = ZeroShotKTSolver(args, teacher_model, student_model, generator_model)
         test_acc = solver.run()
         print('\n\nFINAL TEST ACC RATE: {:02.2f}'.format(test_acc))
         file_name = "final_test_acc_{:02.2f}".format(test_acc)
@@ -66,6 +72,8 @@ if __name__ == "__main__":
     parser.add_argument('--n_student_iter', type=int, default=7, help='per batch, for few and zero shot')
     parser.add_argument('--batch_size', type=int, default=128, help='for few and zero shot')
     parser.add_argument('--z_dim', type=int, default=100, help='for few and zero shot')
+    parser.add_argument('--x_channels', type=int, default=3, help='image data channel amount; probably 3 or 1')
+    parser.add_argument('--x_dim', type=int, default=32, help='image data x- and y-axis size; must be multiple of 4')
     parser.add_argument('--student_learning_rate', type=float, default=2e-3)
     parser.add_argument('--generator_learning_rate', type=float, default=1e-3)
     parser.add_argument('--teacher_architecture', type=str, default='LeNet')
