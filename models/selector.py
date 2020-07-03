@@ -30,12 +30,14 @@ def select_model(dataset,
             checkpoint = torch.load(model_path, map_location='cpu')
             model.load_state_dict(checkpoint['state_dict'])
 
-    elif dataset in ["Omniglot"]:
+    elif model_name == "Conv4":
         n_way = 5
         n_channels = 64
 
-        if model_name == "Conv4":
+        if dataset == "Omniglot":
             model = ModelConvOmniglot(n_way, n_channels)
+        elif dataset == "MiniImagenet":
+            model = ModelConvMiniImagenet(n_way, n_channels)
         else:
             raise NotImplementedError
 
