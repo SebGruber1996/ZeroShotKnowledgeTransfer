@@ -30,4 +30,4 @@ python3 ${EXECUTABLE_FILE} \
 --save_model_path ${LOG_DIR} \
 --seeds 0 1 2 \
 --workers 2 \
---use_gpu True
+--device "cuda:0"

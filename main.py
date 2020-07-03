@@ -89,15 +89,14 @@ if __name__ == "__main__":
     parser.add_argument('--save_model_path', type=str, default="/home/paul/git/FewShotKT/logs/")
     parser.add_argument('--seeds', nargs='*', type=int, default=[0, 1])
     parser.add_argument('--workers', type=int, default=1)
-    parser.add_argument('--use_gpu', type=str2bool, default=False, help='set to False to debug on cpu, using LeNets')
+    parser.add_argument('--device', type=str, default="cpu")
     args = parser.parse_args()
 
     args.total_n_pseudo_batches = int(args.total_n_pseudo_batches)
     if args.AT_beta > 0: assert args.student_architecture[:3] in args.teacher_architecture
     args.log_freq = max(1, int(args.total_n_pseudo_batches / 100))
     args.dataset_path = os.path.join(args.datasets_path, args.dataset)
-    args.use_gpu = args.use_gpu and torch.cuda.is_available()
-    args.device = torch.device('cuda') if args.use_gpu else torch.device('cpu')
+    args.device = torch.device(args.device)
     args.experiment_name = 'ZeroShotKnowledgeTransfer_{}_{}_{}_gi{}_si{}_zd{}_plr{}_slr{}_bs{}_T{}_beta{}'.format(args.dataset, args.teacher_architecture,  args.student_architecture, args.n_generator_iter, args.n_student_iter, args.z_dim, args.generator_learning_rate, args.student_learning_rate, args.batch_size, args.KL_temperature, args.AT_beta)
 
     print('\nTotal data batches: {}'.format(args.total_n_pseudo_batches))
