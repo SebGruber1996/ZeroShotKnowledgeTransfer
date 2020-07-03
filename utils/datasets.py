@@ -34,9 +34,9 @@ def get_test_loader(args):
     elif args.dataset == "Omniglot":
         task_file = args.pretrained_models_path.replace("model", "task")
         test_dataset = torch.load(task_file)
-        xs = torch.cat([test_dataset[0], test_dataset[2]])
-        ys = torch.cat([test_dataset[1], test_dataset[3]])
-        #test_loader = zip(xs, ys)
+        # include support set or not?
+        xs = test_dataset[2]#torch.cat([test_dataset[0], test_dataset[2]])
+        ys = test_dataset[3]#torch.cat([test_dataset[1], test_dataset[3]])
         # list with 1 element
         test_loader = [(xs, ys)]
 

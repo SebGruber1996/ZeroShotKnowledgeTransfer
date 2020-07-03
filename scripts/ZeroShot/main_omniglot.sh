@@ -9,7 +9,7 @@ DATASETS_DIR=~
 
 python3 ${EXECUTABLE_FILE} \
 --dataset "Omniglot" \
---total_n_pseudo_batches 8e4 \
+--total_n_pseudo_batches 2e4 \
 --n_generator_iter 1 \
 --n_student_iter 10 \
 --batch_size 64 \
