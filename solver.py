@@ -46,7 +46,10 @@ class ZeroShotKTSolver(object):
         self.logger = Logger(log_dir=self.experiment_path)
 
         if os.path.exists(self.experiment_path):
-            if self.args.use_gpu:
+            if self.args.device.type == "cpu":
+                shutil.rmtree(self.experiment_path) # clear debug logs on cpu
+                os.makedirs(self.experiment_path)
+            else:
                 checkpoint_path = os.path.join(self.experiment_path, 'last.pth.tar')
                 if os.path.isfile(checkpoint_path):
                     checkpoint = torch.load(checkpoint_path)
@@ -59,9 +62,6 @@ class ZeroShotKTSolver(object):
                     self.student.load_state_dict(checkpoint['student_state_dict'])
                     self.optimizer_student.load_state_dict(checkpoint['optimizer_student'])
                     self.scheduler_student.load_state_dict(checkpoint['scheduler_student'])
-            else:
-                shutil.rmtree(self.experiment_path) # clear debug logs on cpu
-                os.makedirs(self.experiment_path)
         else:
             os.makedirs(self.experiment_path)
 
