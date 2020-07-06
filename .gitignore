@@ -109,3 +109,4 @@ venv.bak/
 #codebase-specific
 #logs/*
 datasets/*
+/logs
