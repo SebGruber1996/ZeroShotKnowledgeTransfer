@@ -66,7 +66,7 @@ if __name__ == "__main__":
 
     parser = argparse.ArgumentParser(description='Welcome to the future')
 
-    parser.add_argument('--dataset', type=str, default='SVHN', choices=['SVHN', 'CIFAR10', "Omniglot", "MiniImagenet"])
+    parser.add_argument('--dataset', type=str, default='SVHN', choices=['SVHN', 'CIFAR10', "Omniglot", "MiniImagenet", "CIFAR-FS"])
     parser.add_argument('--total_n_pseudo_batches', type=float, default=1000)
     parser.add_argument('--n_generator_iter', type=int, default=1, help='per batch, for few and zero shot')
     parser.add_argument('--n_student_iter', type=int, default=7, help='per batch, for few and zero shot')

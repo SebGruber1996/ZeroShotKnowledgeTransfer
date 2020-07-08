@@ -38,6 +38,8 @@ def select_model(dataset,
             model = ModelConvOmniglot(n_way, n_channels)
         elif dataset == "MiniImagenet":
             model = ModelConvMiniImagenet(n_way, n_channels)
+        elif dataset == "CIFAR-FS":
+            model = ModelConvCIFARFS(n_way, n_channels)
         else:
             raise NotImplementedError
 

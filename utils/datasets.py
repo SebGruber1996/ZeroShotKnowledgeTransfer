@@ -31,7 +31,7 @@ def get_test_loader(args):
             pin_memory=False)
 
 
-    elif args.dataset in ["Omniglot", "MiniImagenet"]:
+    elif args.dataset in ["Omniglot", "MiniImagenet", "CIFAR-FS"]:
         task_file = args.pretrained_models_path.replace("model", "task")
         test_dataset = torch.load(task_file)
         # include support set or not?
