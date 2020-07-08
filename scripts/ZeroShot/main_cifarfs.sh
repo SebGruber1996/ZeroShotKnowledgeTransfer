@@ -22,7 +22,7 @@ python3 ${EXECUTABLE_FILE} \
 --student_architecture "Conv4" \
 --KL_temperature 1 \
 --AT_beta 0 \
---pretrained_models_path ~/Repositories/master_thesis_sg/results/CIFAR-FS/batch_size_4_meta_epochs_100_max_batches_100_max_batches_val_100_seed_123/'teacher_model_2020-07-03 14:25:21.562470.th' \
+--pretrained_models_path ~/Repositories/master_thesis_sg/results/CIFAR-FS/batch_size_4_meta_epochs_100_max_batches_100_max_batches_val_100_seed_123/'teacher_model_2020-07-08 10:31:09.720001.th' \
 --datasets_path ${DATASETS_DIR} \
 --log_directory_path ${LOG_DIR} \
 --save_final_model True \
