@@ -22,12 +22,12 @@ python3 ${EXECUTABLE_FILE} \
 --student_architecture "Conv4" \
 --KL_temperature 1 \
 --AT_beta 0 \
---pretrained_models_path ~/Repositories/master_thesis_sg/results/Omniglot/batch_size_8_meta_epochs_100_max_batches_100_max_batches_val_100_seed_123/'teacher_model_2020-07-01 17:04:22.434139.th' \
+--pretrained_models_path ~/Repositories/master_thesis_sg/results/Omniglot/batch_size_8_meta_epochs_100_max_batches_100_max_batches_val_100_seed_123/'teacher_model_2020-07-01 17:04:22.504888.th' \
 --datasets_path ${DATASETS_DIR} \
 --log_directory_path ${LOG_DIR} \
 --save_final_model True \
 --save_n_checkpoints 0 \
 --save_model_path ${LOG_DIR} \
---seeds 0 1 2 \
+--seeds 3 4 5 \
 --workers 2 \
---device "cuda:0"
+--device "cuda:2"
